@@ -38,18 +38,18 @@ extension LibraryViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func checkOut(at indexPath: IndexPath) {
-        let task = self.library.task[indexPath.row]
+        var task = self.library.task[indexPath.row]
         
         let calendar = Calendar(identifier: .gregorian)
         let dueDate = calendar.date(byAdding: .day, value: 7, to: Date())!
         
-        Task.CompletedTask = .checkedOut(dueDate: dueDate)
+        task.completedTask = .checkedOut(dueDate: dueDate)
         (tableView.cellForRow(at: indexPath) as! LibraryCell).setup(task: task)
     }
     
     func checkIn(at indexPath: IndexPath) {
-        let task = self.library.task[indexPath.row]
-        Task.CompletedTask = .checkedIn
+        var task = self.library.task[indexPath.row]
+        task.completedTask = .checkedIn
         (tableView.cellForRow(at: indexPath) as! LibraryCell).setup(task: task)
     }
     
